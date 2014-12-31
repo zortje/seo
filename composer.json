@@ -1,0 +1,25 @@
+{
+  "name": "zortium/seo",
+  "description": "Zortium SEO module",
+  "type": "library",
+  "keywords": [
+    "seo"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "René Tønner Stokholm",
+      "email": "zortje@gmail.com",
+      "homepage": "http://www.renestokholm.dk",
+      "role": "developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Seo\\": "src/"
+    }
+  }
+}
