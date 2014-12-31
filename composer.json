@@ -1,5 +1,6 @@
 {
   "name": "zortje/seo",
+  "description": "Zortium Search Engine Optimization",
   "type": "library",
   "keywords": [
     "seo"
@@ -13,6 +14,9 @@
       "role": "developer"
     }
   ],
+  "support": {
+    "issues": "https://github.com/zortje/seo/issues"
+  },
   "require": {
     "php": ">=5.3.3"
   },
