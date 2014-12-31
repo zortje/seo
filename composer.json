@@ -1,6 +1,5 @@
 {
-  "name": "zortium/seo",
-  "description": "Zortium SEO module",
+  "name": "zortje/seo",
   "type": "library",
   "keywords": [
     "seo"
