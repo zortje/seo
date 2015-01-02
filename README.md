@@ -1,6 +1,6 @@
 # Zortium Search Engine Optimization
 
-[![Build Status](https://travis-ci.org/zortje/seo.svg?branch=master)](https://travis-ci.org/zortje/seo) [![Build Status](https://scrutinizer-ci.com/g/zortje/seo/badges/build.png?b=master)](https://scrutinizer-ci.com/g/zortje/seo/build-status/master) [![Code Coverage](https://scrutinizer-ci.com/g/zortje/seo/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/zortje/seo/?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/zortje/seo/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/zortje/seo/?branch=master)
+[![Travis](https://img.shields.io/travis/zortje/seo.svg?style=flat)](https://travis-ci.org/zortje/seo.svg?branch=master) [![Scrutinizer branch](https://img.shields.io/scrutinizer/coverage/g/zortje/seo/master.svg?style=flat)](https://scrutinizer-ci.com/g/zortje/seo/?branch=master) [![Scrutinizer](https://img.shields.io/scrutinizer/g/zortje/seo.svg?style=flat)](https://scrutinizer-ci.com/g/zortje/seo/?branch=master)
 
 ## Features
 
