@@ -1,15 +1,23 @@
 <?php
 
-namespace SEO\Page;
+namespace Zortje\SEO\Page;
 
 /**
  * Class Title
  *
- * @package SEO\Page
+ * @package Zortje\SEO\Page
  */
 class Title {
 
+	/**
+	 * @var string
+	 */
 	private $title;
+
+	/**
+	 * @var array
+	 */
+	private $issues;
 
 	/**
 	 * @param string $title Page title
@@ -24,6 +32,32 @@ class Title {
 	 * @return bool TRUE if optimized, otherwise FALSE
 	 */
 	public function isOptimized() {
-		return true;
+		/**
+		 * Reset issues
+		 */
+		$this->issues = [];
+
+		/**
+		 * Check length
+		 */
+		if (strlen($this->title) > 55) {
+			$this->issues[] = 'Title is longer than 55 characters';
+		}
+
+		/**
+		 * Check if there are any issues
+		 */
+		$isOptimized = count($this->issues) === 0;
+
+		return $isOptimized;
+	}
+
+	/**
+	 * Gets issues if any
+	 *
+	 * @return array Issues
+	 */
+	public function getIssues() {
+		return $this->issues;
 	}
 }

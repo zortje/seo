@@ -24,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "SEO\\": "src/"
+      "Zortje\\SEO\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "SEO\\Tests\\": "tests/"
+      "Zortje\\SEO\\Tests\\": "tests/"
     }
   }
 }

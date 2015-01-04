@@ -1,13 +1,13 @@
 <?php
 
-namespace SEO\Tests\Page;
+namespace Zortje\SEO\Tests\Page;
 
-use SEO\Page\Title;
+use Zortje\SEO\Page\Title;
 
 /**
  * Class TitleTest
  *
- * @package SEO\Tests\Page
+ * @package Zortje\SEO\Tests\Page
  */
 class TitleTest extends \PHPUnit_Framework_TestCase {
 
@@ -15,5 +15,29 @@ class TitleTest extends \PHPUnit_Framework_TestCase {
 		$title = new Title('Lorem ipsum');
 
 		$this->assertTrue($title->isOptimized());
+	}
+
+	public function testIsNotOptimized() {
+		$title = new Title('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+
+		$this->assertFalse($title->isOptimized());
+	}
+
+	public function testResetOfIssues() {
+		$title = new Title('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+
+		/**
+		 * Check isOptimized once and save the issues
+		 */
+		$title->isOptimized();
+
+		$issues = $title->getIssues();
+
+		/**
+		 * Check isOptimized again and assert saved issues array is the same size as the current issues
+		 */
+		$title->isOptimized();
+
+		$this->assertSameSize($issues, $title->getIssues());
 	}
 }
