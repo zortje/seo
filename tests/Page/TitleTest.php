@@ -15,12 +15,14 @@ class TitleTest extends \PHPUnit_Framework_TestCase {
 		$title = new Title('Lorem ipsum');
 
 		$this->assertTrue($title->isOptimized());
+		$this->assertSame(0, count($title->getIssues()));
 	}
 
 	public function testIsNotOptimized() {
 		$title = new Title('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
 
 		$this->assertFalse($title->isOptimized());
+		$this->assertGreaterThan(0, count($title->getIssues()));
 	}
 
 	public function testResetOfIssues() {
