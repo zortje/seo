@@ -17,7 +17,7 @@ class Title {
 	/**
 	 * @var array
 	 */
-	private $issues;
+	private $issues = [];
 
 	/**
 	 * @param string $title Page title
