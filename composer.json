@@ -1,7 +1,6 @@
 {
     "name": "zortje/seo",
     "description": "Zortium Search Engine Optimization",
-    "version": "0.0.0",
     "type": "library",
     "keywords": ["seo"],
     "license": "MIT",
