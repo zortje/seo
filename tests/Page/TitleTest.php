@@ -7,39 +7,52 @@ use Zortje\SEO\Page\Title;
 /**
  * Class TitleTest
  *
- * @package Zortje\SEO\Tests\Page
+ * @package            Zortje\SEO\Tests\Page
+ *
+ * @coversDefaultClass Zortje\SEO\Page\Title
  */
 class TitleTest extends \PHPUnit_Framework_TestCase {
 
-	public function testIsOptimized() {
-		$title = new Title('Lorem ipsum');
+	/**
+	 * @covers ::setTitle
+	 * @covers ::getTitle
+	 */
+	public function testSetterAndGetter() {
+		$title = new Title();
+		$title->setTitle('Lorem ipsum');
 
-		$this->assertTrue($title->isOptimized());
-		$this->assertSame(0, count($title->getIssues()));
+		$this->assertSame('Lorem ipsum', $title->getTitle());
 	}
 
-	public function testIsNotOptimized() {
-		$title = new Title('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+	/**
+	 * @covers ::analyzeForIssues
+	 */
+	public function testAnalyzeForIssuesOptimized() {
+		$title = new Title();
+		$title->setTitle('Lorem ipsum');
 
-		$this->assertFalse($title->isOptimized());
-		$this->assertGreaterThan(0, count($title->getIssues()));
+		$this->assertSame([], $title->analyzeForIssues());
 	}
 
-	public function testResetOfIssues() {
-		$title = new Title('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+	/**
+	 * @covers ::analyzeForIssues
+	 */
+	public function testAnalyzeForIssuesEmpty() {
+		$title = new Title();
 
-		/**
-		 * Check isOptimized once and save the issues
-		 */
-		$title->isOptimized();
-
-		$issues = $title->getIssues();
-
-		/**
-		 * Check isOptimized again and assert saved issues array is the same size as the current issues
-		 */
-		$title->isOptimized();
-
-		$this->assertSameSize($issues, $title->getIssues());
+		$this->assertSame(0, strlen($title->getTitle()));
+		$this->assertSame(['Title is not set or empty'], $title->analyzeForIssues());
 	}
+
+	/**
+	 * @covers ::analyzeForIssues
+	 */
+	public function testAnalyzeForIssuesTooLong() {
+		$title = new Title();
+		$title->setTitle('abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz ab');
+
+		$this->assertSame(56, strlen($title->getTitle()));
+		$this->assertSame(['Title is longer than 55 characters'], $title->analyzeForIssues());
+	}
+
 }

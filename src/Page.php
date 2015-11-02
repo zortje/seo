@@ -12,60 +12,114 @@ use Zortje\SEO\Page\Title;
 class Page {
 
 	/**
+	 * @var array<string, array<string, string>> Heading count patterns
+	 */
+	private $headingCountPattern = [
+		'h1' => [
+			'pattern' => '/^1$/',
+			'issue'   => 'There should be one and only one h1 tag'
+		],
+		'h2' => [
+			'pattern' => '/^[0-5]$/',
+			'issue'   => 'There should be no more than five h2 tags'
+		],
+		'h3' => [
+			'pattern' => '/^[0-7]$/',
+			'issue'   => 'There should be no more than seven h3 tags'
+		]
+	];
+
+	/**
 	 * @var \DOMDocument
 	 */
 	private $dom;
 
 	/**
-	 * @var array
+	 * @param \DOMDocument $dom
 	 */
-	private $issues = [];
-
 	public function __construct(\DOMDocument $dom) {
 		$this->dom = $dom;
 	}
 
-	public function isOptimized() {
-		/**
-		 * Check H1 tag(s)
-		 */
-		$headingOneCount = $this->dom->getElementsByTagName('h1')->length;
+	/**
+	 * Analyze page for issues
+	 *
+	 * @return array Issues; empty if optimized
+	 */
+	public function analyzeForIssues() {
+		$issues = [];
 
-		if ($headingOneCount === 0) {
-			$this->issues[] = 'Page has no H1 tags';
-		} else if ($headingOneCount > 1) {
-			$this->issues[] = 'Page has more than one H1 tags';
+		/**
+		 * Meta description
+		 */
+		// @todo
+
+		/**
+		 * Title
+		 */
+		$issues = array_merge($issues, $this->analyzeTitleForIssues());
+
+		/**
+		 * Headings
+		 */
+		$issues = array_merge($issues, $this->analyzeHeadingsForIssues());
+
+		/**
+		 * Return issues
+		 */
+		return $issues;
+	}
+
+	/**
+	 * Analyze title for issues
+	 *
+	 * @return array Issues; empty if optimized
+	 */
+	private function analyzeTitleForIssues() {
+		$issues = [];
+
+		/**
+		 * Create title object
+		 */
+		$title = new Title();
+
+		$titleTags = $this->dom->getElementsByTagName('title');
+
+		if ($titleTags->length > 0) {
+			$title->setTitle($titleTags->item(0)->nodeValue);
 		}
 
+		$issues = array_merge($issues, $title->analyzeForIssues());
+
 		/**
-		 * Check title tag
+		 * Return issues
 		 */
-		$title = $this->dom->getElementsByTagName('title');
+		return $issues;
+	}
 
-		if ($title->length > 0) {
-			$title = new Title($title->item(0)->nodeValue);
+	/**
+	 * Analyze headings for issues
+	 *
+	 * @return array Issues; empty if optimized
+	 */
+	private function analyzeHeadingsForIssues() {
+		$issues = [];
 
-			if (!$title->isOptimized()) {
-				foreach ($title->getIssues() as $issue) {
-					$this->issues[] = $issue;
-				}
+		/**
+		 * Go though the heading count patterns
+		 */
+		foreach ($this->headingCountPattern as $tag => $rule) {
+			$elementCount = $this->dom->getElementsByTagName($tag)->length;
+
+			if (!preg_match($rule['pattern'], $elementCount)) {
+				$issues[] = $rule['issue'];
 			}
 		}
 
 		/**
-		 * Check if there are any issues
+		 * Return issues
 		 */
-		$isOptimized = count($this->issues) === 0;
-
-		return $isOptimized;
+		return $issues;
 	}
 
-	/**
-	 * Gets issues if any
-	 *
-	 * @return array Issues
-	 */
-	public function getIssues() {
-		return $this->issues;
-	}
 }

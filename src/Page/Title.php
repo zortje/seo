@@ -15,49 +15,39 @@ class Title {
 	private $title;
 
 	/**
-	 * @var array
-	 */
-	private $issues = [];
-
-	/**
 	 * @param string $title Page title
 	 */
-	public function __construct($title) {
+	public function setTitle($title) {
 		$this->title = $title;
 	}
 
 	/**
-	 * Determines if a page title is optimized
-	 *
-	 * @return bool TRUE if optimized, otherwise FALSE
+	 * @return string Page title
 	 */
-	public function isOptimized() {
-		/**
-		 * Reset issues
-		 */
-		$this->issues = [];
-
-		/**
-		 * Check length
-		 */
-		if (strlen($this->title) > 55) {
-			$this->issues[] = 'Title is longer than 55 characters';
-		}
-
-		/**
-		 * Check if there are any issues
-		 */
-		$isOptimized = count($this->issues) === 0;
-
-		return $isOptimized;
+	public function getTitle() {
+		return $this->title;
 	}
 
 	/**
-	 * Gets issues if any
+	 * Analyze title for issues
 	 *
-	 * @return array Issues
+	 * @return array Issues; empty if optimized
 	 */
-	public function getIssues() {
-		return $this->issues;
+	public function analyzeForIssues() {
+		$issues = [];
+
+		/**
+		 * Length
+		 */
+		if (strlen($this->title) === 0) {
+			$issues[] = 'Title is not set or empty';
+		}
+
+		if (strlen($this->title) > 55) {
+			$issues[] = 'Title is longer than 55 characters';
+		}
+
+		return $issues;
 	}
+
 }
