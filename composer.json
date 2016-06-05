@@ -2,7 +2,9 @@
     "name": "zortje/seo",
     "description": "Search Engine Optimization",
     "type": "library",
-    "keywords": ["seo"],
+    "keywords": [
+        "seo"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -16,10 +18,13 @@
         "issues": "https://github.com/zortje/seo/issues"
     },
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "zortje/rules": "~1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~5.0",
+        "phpunit/php-code-coverage": "3.3",
+        "fzaninotto/faker": "~1.0",
         "phpmd/phpmd": "~2.0",
         "squizlabs/php_codesniffer": "~2.0"
     },
