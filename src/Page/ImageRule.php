@@ -4,14 +4,15 @@ namespace Zortje\SEO\Page;
 
 use Zortje\Rules\Result;
 use Zortje\Rules\ResultCollection;
+use Zortje\Rules\RuleInterface;
 use Zortje\Rules\Subject;
 
 /**
  * Class ImageRule
  *
- * @package Page
+ * @package Zortje\SEO\Page
  */
-class ImageRule
+class ImageRule implements RuleInterface
 {
 
     /**
@@ -46,7 +47,8 @@ class ImageRule
         }
 
         if ($missingAltAttributes > 0) {
-            $resultCollection->add(new Result($contextDescription, "$missingAltAttributes img tag is missing alt attribute"));
+            $resultCollection->add(new Result($contextDescription,
+                "$missingAltAttributes img tag is missing alt attribute"));
         }
 
         return $resultCollection;
