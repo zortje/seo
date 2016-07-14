@@ -2,6 +2,7 @@
 
 Library for for analyzing websites for search engine optimization opportunities.
 
+
 [![Packagist](https://img.shields.io/packagist/v/zortje/seo.svg?style=flat)](https://packagist.org/packages/zortje/seo)
 [![Travis](https://img.shields.io/travis/zortje/seo.svg?style=flat)](https://travis-ci.org/zortje/seo) 
 [![Codecov](https://img.shields.io/codecov/c/github/zortje/seo.svg)](https://codecov.io/github/zortje/seo)
